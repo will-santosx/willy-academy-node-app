@@ -1,11 +1,11 @@
 {
   "name": "willy-academy-node-app",
   "version": "1.0.0",
-  "main": "src/app.ts",
+  "main": "./src/app.ts",
   "scripts": {
     "dev": "npx nodemon",
-    "build": "rimraf ../build && tsc",
-    "start": "npm run build && node ../build/app.js"
+    "build": "rimraf ./build && tsc",
+    "start": "npm run build && node ./build/app.js"
   },
   "author": "Willians Santos",
   "license": "ISC",
