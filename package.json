@@ -4,8 +4,8 @@
   "main": "src/app.ts",
   "scripts": {
     "dev": "npx nodemon",
-    "build": "rimraf ./build && tsc",
-    "start": "npm run build && node build/app.js"
+    "build": "rimraf ../build && tsc",
+    "start": "npm run build && node ../build/app.js"
   },
   "author": "Willians Santos",
   "license": "ISC",
