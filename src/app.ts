@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import { authRoutes } from "./auth/routes/authRoutes";
 
 dotenv.config();
 const app = express();
@@ -18,10 +19,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(201).send("<span>Funcionando!</span>");
-});
+app.use("/auth", authRoutes);
 
 app.listen(app_port, () => {
-  console.log("Servidor local rodando em: http://localhost:" + app_port);
+  console.log("Servidor rodando na porta " + app_port);
 });
