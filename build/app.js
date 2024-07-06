@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
+const authRoutes_1 = require("./auth/routes/authRoutes");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const app_port = Number(process.env.PORT) || 8905;
@@ -17,9 +18,7 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
     next();
 });
-app.get("/", (req, res) => {
-    res.status(201).send("<span>Funcionando!</span>");
-});
+app.use("/auth", authRoutes_1.authRoutes);
 app.listen(app_port, () => {
-    console.log("Servidor local rodando em: http://localhost:" + app_port);
+    console.log("Servidor rodando na porta " + app_port);
 });
