@@ -83,22 +83,17 @@ export const authenticateToken = (
   }
 };
 
-export const authenticateAPI = (
+export function validateApiKey(
   req: Request,
   res: Response,
   next: NextFunction
-) => {
-  const apiKey = req.query.api_key;
-  const apiToken = process.env.API_KEY;
-  if (!apiKey) {
-    return res.status(401).json({ msg: "Não autorizado, confira sua chave." });
-  }
-  if (apiKey !== apiToken) {
-    return res.status(401).json({ msg: "Não autorizado, confira sua chave." });
-  }
-  try {
+) {
+  const apiKey = req.headers["x-functions-key"];
+  const validApiKey = process.env.API_KEY;
+
+  if (apiKey === validApiKey) {
     next();
-  } catch (err) {
-    res.status(401).json({ msg: "Token inválido." });
+  } else {
+    res.status(403).json({ message: "Chave inválida" });
   }
-};
+}

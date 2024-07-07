@@ -9,14 +9,14 @@ import {
   validateSignin,
   validateSignup,
   AuthRequest,
-  authenticateAPI,
+  validateApiKey,
 } from "../services/authServices";
 
 export const authRoutes = Router();
 
 authRoutes.post(
   "/sign-up",
-  authenticateAPI,
+  validateApiKey,
   validateSignup,
   async (req: Request, res: Response) => {
     try {
@@ -37,7 +37,7 @@ authRoutes.post(
 
 authRoutes.post(
   "/sign-in",
-  authenticateAPI,
+  validateApiKey,
   validateSignin,
   async (req: Request, res: Response) => {
     try {
@@ -58,7 +58,7 @@ authRoutes.post(
 
 authRoutes.delete(
   "/user/:id",
-  authenticateAPI,
+  validateApiKey,
   async (req: AuthRequest, res: Response) => {
     const id_param = req.params.id;
     if (!/^\d+$/.test(id_param)) {
